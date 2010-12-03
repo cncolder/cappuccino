@@ -1,5 +1,5 @@
 /*
- * NSMutableDictionary.j
+ * NSDictionary.j
  * nib2cib
  *
  * Portions based on NSCell.m (09/09/2008) in Cocotron (http://www.cocotron.org/)
@@ -23,7 +23,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-@implementation NSMutableDictionary : CPObject
+@implementation NSDictionary : CPObject
 {
 }
 
@@ -32,4 +32,9 @@
     return [CPDictionary dictionaryWithObjects:[aCoder decodeObjectForKey:@"NS.objects"] forKeys:[aCoder decodeObjectForKey:@"NS.keys"]];
 }
 
+@end
+
+@implementation NSMutableDictionary : NSDictionary
+{
+}
 @end

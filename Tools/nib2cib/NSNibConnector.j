@@ -117,7 +117,16 @@ NIB_CONNECTION_EQUIVALENCY_TABLE = {};
     {
         _binding = [aCoder decodeObjectForKey:@"NSBinding"];
         _keyPath = [aCoder decodeObjectForKey:@"NSKeyPath"];
-        _options = [aCoder decodeObjectForKey:@"NSOptions"];
+        _options = [CPDictionary dictionary];
+
+        var nsOptions = [aCoder decodeObjectForKey:@"NSOptions"];
+        for (var index = 0, count = [nsOptions count]; index < count; index++)
+        {
+            var nsKey = [[nsOptions allKeys] objectAtIndex:index],
+                cpKey = [CPString stringWithFormat:@"CP%@BindingOption", [nsKey substringFromIndex:2]],
+                value = [nsOptions valueForKey:nsKey];
+            [_options setValue:value forKey:cpKey];
+        }
 
         CPLog.debug(@"Binding Connector: " + [_binding description] + " to: " + _destination + " " + [_keyPath description] + " " + [_options description]);
     }
